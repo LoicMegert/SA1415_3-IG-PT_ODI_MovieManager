@@ -31,8 +31,8 @@ public class Person implements Serializable {
     }
     
     /**
-     * Retourne le film correspondant au numéro passé en paramètre, ou null si
-     * aucun film ne correspond.
+     * Retourne le film correspondant au numéro unique d'identification passé en
+     * paramètre, ou null si aucun film ne correspond.
      *
      * @param id Le numéro unique d'identification du film à rechercher
      * @return Le film recherché, ou null si aucun film ne correspond
@@ -44,15 +44,11 @@ public class Person implements Serializable {
     /**
      * Méthode qui ajoute un film à la personne
      *
-     * @param id Le numéro unique d'identification du film
-     * @param name Le nom du film
-     * @param producer Le producteur du film
-     * @return Le film qui a été créé
+     * @param mov Le film à ajouter
      */
-    public Movie addMovie(Long id, String name, String producer) {
-        Movie mov = new Movie(id, name, producer, this);
-        this.movies.put(id, mov);
-        return mov;
+    public void addMovie(Movie mov) {
+        this.movies.put(mov.getId(), mov);
+        mov.addPerson(this);
     }
 
     public Long getId() {

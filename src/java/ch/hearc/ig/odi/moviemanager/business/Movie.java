@@ -1,31 +1,55 @@
 package ch.hearc.ig.odi.moviemanager.business;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author Loïc Megert <loic.megert@he-arc.ch>
  */
 public class Movie implements Serializable {
-    
+
     private Long id;
     private String name;
     private String producer;
-    private Person person;
+    private Map<Long, Person> people;
+
+    /**
+     * Constructeur paramétré de la classe Movie. Toutes les valeurs sont
+     * obligatoires
+     *
+     * @param id Le numéro unique d'identification du film
+     * @param name Le nom du film
+     * @param producer Le producteur du film
+     */
+    public Movie(Long id, String name, String producer) {
+        this.id = id;
+        this.name = name;
+        this.producer = producer;
+        this.people = new HashMap();;
+    }
     
     /**
-	 * Constructeur paramétré de la classe Movie. Toutes les valeurs sont obligatoires
-	 * @param id Le numéro unique d'identification du film
-	 * @param name Le nom du film
-	 * @param producer Le producteur du film
-	 * @param person La personne à qui appartient ce film.
-	 */
-	public Movie(Long id, String name, String producer, Person person) {
-            this.id = id;
-            this.name = name;
-            this.producer = producer;
-            this.person = person;        
-	}
+     * Retourne la personne correspondant au numéro unique d'identification passé 
+     * en paramètre, ou null si aucun film ne correspond.
+     *
+     * @param id Le numéro unique d'identification de la personne à rechercher
+     * @return La personne recherchée, ou null si aucun film ne correspond
+     */
+    public Person getPersonByNumber(Long id) {
+        return people.get(id);
+    }
+
+    /**
+     * Méthode qui ajoute une personne comme possesseur de ce film
+     *
+     * @param pers La personne à ajouter
+     */
+    public void addPerson(Person pers) {
+        this.people.put(pers.getId(), pers);
+        //pers.addMovie(this);
+    }
 
     public Long getId() {
         return id;
@@ -51,12 +75,8 @@ public class Movie implements Serializable {
         this.producer = producer;
     }
 
-    public Person getPerson() {
-        return person;
+    public Map<Long, Person> getPeople() {
+        return people;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-        
 }
