@@ -1,5 +1,6 @@
 package ch.hearc.ig.odi.moviemanager.business;
 
+import ch.hearc.ig.odi.moviemanager.exception.UniqueException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +47,10 @@ public class Movie implements Serializable {
      *
      * @param pers La personne à ajouter
      */
-    public void addPerson(Person pers) {
+    public void addPerson(Person pers) throws UniqueException {
+        if (this.people.get(pers.getId()) != null) {
+            throw new UniqueException("Error, movie has already been seen by this person");
+        }
         this.people.put(pers.getId(), pers);
         //pers.addMovie(this);
     }
