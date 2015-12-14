@@ -22,6 +22,7 @@ import javax.enterprise.context.SessionScoped;
 @Stateful
 public class Services implements Serializable{
     
+    private static Logger logger = Logger.getLogger(Services.class.getName());
     private Map<Long, Person> people;
     private Map<Long, Movie> movies;
     
@@ -76,6 +77,7 @@ public class Services implements Serializable{
             people.get(6l).addMovie(movies.get(2l));
         } catch (UniqueException ex) {
             // Ne devrait pas arriver
+            logger.log(Level.SEVERE, null, ex);
         }
     }
     
