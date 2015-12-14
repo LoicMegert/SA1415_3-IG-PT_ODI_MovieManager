@@ -43,7 +43,7 @@ public class Person implements Serializable {
     }
 
     /**
-     * Méthode qui ajoute un film à la personne
+     * Méthode qui ajoute un film à cette personne
      *
      * @param mov Le film à ajouter
      */
@@ -53,6 +53,15 @@ public class Person implements Serializable {
         }
         this.movies.put(mov.getId(), mov);
         mov.addPerson(this);
+    }
+    
+    /**
+     * Méthode qui permet d'obtenir le nombre de films vus par cette personne
+     * 
+     * @return Le nombre de films vus par cette personne
+     */
+    public int getMoviesNumber() {
+        return movies.size();
     }
 
     public Long getId() {

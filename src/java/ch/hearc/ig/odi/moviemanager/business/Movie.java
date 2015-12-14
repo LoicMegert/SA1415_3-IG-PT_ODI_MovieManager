@@ -43,7 +43,7 @@ public class Movie implements Serializable {
     }
 
     /**
-     * Méthode qui ajoute une personne comme possesseur de ce film
+     * Méthode qui ajoute une personne comme ayant vu de ce film
      *
      * @param pers La personne à ajouter
      */
@@ -53,6 +53,15 @@ public class Movie implements Serializable {
         }
         this.people.put(pers.getId(), pers);
         //pers.addMovie(this);
+    }
+    
+     /**
+     * Méthode qui permet d'obtenir le nombre de personnes ayant vu ce film
+     * 
+     * @return Le nombre de personnes ayant vu ce film
+     */
+    public int getPeopleNumber() {
+        return people.size();
     }
 
     public Long getId() {
